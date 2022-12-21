@@ -7,8 +7,6 @@ import {
   Image,
 } from 'react-native';
 import React, {useState} from 'react';
-
-
 const DATA = [
   {
     id: 1,
@@ -99,10 +97,20 @@ const App = () => {
       </View>
     );
   };
+  const renderEmpty = () => {
+    return (
+      <View style={styles.emptyContainer}>
+        <Text style={styles.emptyMessageStyle}>Empty</Text>
+      </View>
+    );
+  };
+
 
   return (
     <FlatList
       ListHeaderComponent={renderHeader}
+      ListEmptyComponent={renderEmpty}
+      contentContainerStyle={styles.contentContainer}
       keyExtractor={item => item.id}
       data={data}
       renderItem={renderItem}
@@ -113,6 +121,13 @@ const App = () => {
 export default App;
 
 const styles = StyleSheet.create({
+  contentContainer:{
+    flexGrow:1,
+    justifyContent:'center',
+  },
+  emptyMessageStyle:{
+    textAlign:'center',
+  },
   header: {
     display: 'flex',
     flexDirection: 'row',
@@ -188,5 +203,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 'auto',
+    width: '100%',
+    backgroundColor: 'pink',
   },
 });
